@@ -22,6 +22,18 @@ qr = {}
 ltn12 = {}
 
 --- 
+--- 字典索引
+---@return number
+function addTSOcrDictEx(dict) end
+
+--- 
+--- 显示ui
+---@param jsonstr string
+---@return UIret
+---@retrun config
+function showUI(jsonstr) end
+
+--- 
 --- 飞行模式开关
 -- - 函数功能：用于设置是否打开飞行模式开关
 -- - 引擎版本：iOS v2.1.8,Android v2.0.2 以上
@@ -811,10 +823,9 @@ function image.jpegData(newImage) end
 --- 
 --- 触摸按下
 -- - 函数功能：通过按下动作发送触摸事件。
----@param index number @手指序号（可省略）
 ---@param x number @屏幕横坐标
 ---@param y number @屏幕纵坐标
-function touchDown(index,x,y) end
+function touchDown(x,y) end
 
 --- 
 ---  pngData 获取图片 PNG 数据
@@ -852,10 +863,9 @@ function image.loadData(Maltmage) end
 --- 
 --- 触摸抬起
 -- - 函数功能：通过按下动作发送触摸事件。
----@param index number @手指序号（可省略）
 ---@param x number @屏幕横坐标
 ---@param y number @屏幕纵坐标
-function touchUp(index,x ,y) end
+function touchUp(x ,y) end
 
 --- 
 --- 触摸移动
@@ -2016,7 +2026,7 @@ function ftp.download(localfilepath,severfilepath) end
 ---@param y1 number @找色区域左上角顶点屏幕纵坐标
 ---@param x2 number @找色区域右下角顶点屏幕横坐标
 ---@param y2 number @找色区域右下角顶点屏幕纵坐标
----@param tab table @高阶用法
+---@param tab? table @高阶用法
 ---@return number @返回符合条件的基准点的坐标，如未找到则返回 -1,-1
 function findMultiColorInRegionFuzzy(color,posandcolors,degree,x1,y1,x2,y2,tab) end
 
@@ -2031,7 +2041,7 @@ function findMultiColorInRegionFuzzy(color,posandcolors,degree,x1,y1,x2,y2,tab) 
 ---@param y1 number @找色区域左上角顶点屏幕纵坐标
 ---@param x2 number @找色区域右下角顶点屏幕横坐标
 ---@param y2 number @找色区域右下角顶点屏幕纵坐标
----@param tb table @高阶用法，详细用法详见findMultiColorInRegionFuzzy函数
+---@param tb? table @高阶用法，详细用法详见findMultiColorInRegionFuzzy函数
 ---@return table @以 table 形式返回所有符合条件点的坐标（第一个点为基准点，其余点为参照点），如未找到则返回的 table 为空
 function findMultiColor(color,posandcolors,degree,x1,y1,x2,y2,tb) end
 
@@ -2055,7 +2065,7 @@ function ftp.rename(oldfilepath,filepath) end
 ---@param y1 number @找色区域左上角顶点屏幕纵坐标
 ---@param x2 number @找色区域右下角顶点屏幕横坐标
 ---@param y2 number @找色区域右下角顶点屏幕纵坐标
----@param tab table @高阶用法，详见findMultiColorInRegionFuzzy函数
+---@param tab? table @高阶用法，详见findMultiColorInRegionFuzzy函数
 ---@return table @以 table 形式返回所有符合条件点的坐标（第一个点为基准点，其余点为参照点），如未找到则返回的 table 为空
 function findMultiColorInRegionFuzzyExt(color,posandcolors,degree,x1,y1,x2,y2,tab) end
 
@@ -2078,7 +2088,7 @@ function ftp.delete(filepath) end
 ---@param y1 number @找色区域左上角顶点屏幕纵坐标
 ---@param x2 number @找色区域右下角顶点屏幕横坐标
 ---@param y2 number @找色区域右下角顶点屏幕纵坐标
----@param tab table @高阶用法，详见findMultiColorInRegionFuzzy函数
+---@param tab? table @高阶用法，详见findMultiColorInRegionFuzzy函数
 ---@param ms? number @找色频率，不写默认为 100 毫秒
 ---@param timeout? number @超时时间，不写默认为 60 秒
 ---@return boolean @true - 存在；false - 不存在
@@ -2102,7 +2112,7 @@ function ftp.list(filepath) end
 ---@param y1 number @缺省默认值 0，区域左上角纵坐标
 ---@param x2 number @缺省默认值 0，区域右下角横坐标
 ---@param y2 number @缺省默认值 0，区域右下角纵坐标
----@param tab number @仅 TSLib v1.2.8 及其以上版本支持高阶用法详见findMultiColorInRegionFuzzy函数
+---@param tab? number @仅 TSLib v1.2.8 及其以上版本支持高阶用法详见findMultiColorInRegionFuzzy函数
 ---@return number @返回符合条件的基准点的坐标，如未找到则返回 -1,-1
 function findMultiColorInRegionFuzzyByTable(tmp,degree,x1,y1,x2,y2,tab) end
 
@@ -2538,7 +2548,7 @@ function fwShowImageView(wid,vid,picpath,x1,y1,x2,y2,alpha,radius) end
 ---@param y1 number @子窗口相对于父窗口的左上角顶点纵坐标
 ---@param x2 number @子窗口相对于父窗口的右下角顶点横坐标
 ---@param y2 number @子窗口相对于父窗口的右下角顶点纵坐标
----@param radius number @圆角半径，默认为 0 无圆角，仅支持引擎版本 Androidv3.2.0、iOSv3.1.5 及其以上版本
+---@param radius? number @圆角半径，默认为 0 无圆角，仅支持引擎版本 Androidv3.2.0、iOSv3.1.5 及其以上版本
 function fwShowButton(wid,vid,text,textcolor,bgcolor,image,size,x1,y1,x2,y2,radius) end
 
 
