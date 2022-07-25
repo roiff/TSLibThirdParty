@@ -5,6 +5,7 @@
 -- ts.system = {}
 -- ts.json = {}
 
+ts = {}
 http = {}
 keycode = {}
 image = {}
@@ -29,8 +30,8 @@ function addTSOcrDictEx(dict) end
 --- 
 --- 显示ui
 ---@param jsonstr string
----@return UIret
----@retrun config
+---@return number UIret
+---@retrun string config
 function showUI(jsonstr) end
 
 --- 
